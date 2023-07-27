@@ -27,6 +27,29 @@ def index(request) :
     return render(request,'index.html',data ) 
     
 
+def validateCustomer(customer):
+    error_msg=None
+    if(not customer.first_name):
+        error_msg="first name is requred"
+
+    elif(not customer.last_name):
+        error_msg="lasst name is requred"
+
+    elif(not customer.phone):
+        error_msg="phone number is requred"
+
+    elif(not customer.email):
+        error_msg="email is requred"
+
+    elif(not customer.password):
+        error_msg="password  is requred"
+    elif customer.isExists():
+        error_msg="user already registerd"
+    return error_msg
+
+
+
+
 def signup(request):
     if request.method == "POST":
         data=request.POST
@@ -42,17 +65,24 @@ def signup(request):
         phone=phone,
         email=email,
         password=password)
-
-
-        isExists=customer.isExists()
-        if isExists:
-             result="this mail is already registerd"
-        else:
+        
+        error_msg=validateCustomer(customer)
+        if not error_msg:
             customer.password=make_password(customer.password)  
             customer.register()
-            result="user created successfully"
-        return render(request,'signup.html',{'res':result})
+            error_msg="user created successfully"
+        return render(request,'signup.html',{'res':error_msg})
     return render(request,'signup.html')
     
 
+def login(request):
+    if request.method=='POST':
+        customer=Customer.objects.all()
+        data=request.POST
+        email=data.get('email')
+        password=data.get('password')
+        customer=Customer.get_customer_by_email(email)
+        print(customer)
+        return render (request,'login.html')
 
+    return render (request,'login.html')
