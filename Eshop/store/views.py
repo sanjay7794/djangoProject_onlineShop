@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.shortcuts import render,HttpResponse
 from django.contrib.auth.hashers import make_password,check_password
 # Create your views here.
 from .models.product import *
 from .models.customer import Customer
 from .models.category import Category
+from  django.views import View
 def index(request) :
     prds = None
     #return render(request,'orders/order.html')
@@ -75,14 +76,31 @@ def signup(request):
     return render(request,'signup.html')
     
 
-def login(request):
-    if request.method=='POST':
-        customer=Customer.objects.all()
+class Login(View):
+    # def get(self,request):
+    #     return render(request,'login.html')
+
+
+    def post(self,request):
+
+        error_msg=None        
         data=request.POST
         email=data.get('email')
         password=data.get('password')
         customer=Customer.get_customer_by_email(email)
-        print(customer)
-        return render (request,'login.html')
+        if customer:
+            flag=check_password(password,customer.password)
+            if flag:
+                return redirect('homepage')
+            else:
+                error_msg="email or password invalid" 
 
-    return render (request,'login.html')
+ 
+        else:  
+            error_msg="email or password invalid"    
+        return render (request,'login.html',{'res':error_msg})
+    
+    
+    
+    
+ 
