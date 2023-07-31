@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container">
+    <div class="p-4 m-4">
+        <div class="col-lg-5 mx-auto border rounded pt-2 pb-4">
+            <h3 class="alert alert-light border rounded">Create An Account</h3>
+
+            <form action="/signup" method="POST">
+                {% csrf_token %}
+                <div class="alert alert-success" role="alert">
+                    {{res}}
+
+                </div>
+                <div class="mb-3">
+                    <label for="first name" class="form-label">First Name</label>
+                    <input type="text" name="first_name" class="form-control" id="">
+
+                </div>
+                <div class="mb-3">
+                    <label for="last name" class="form-label">Last Name</label>
+                    <input type="text" name="last_name" class="form-control" id="">
+
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1">
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Mo. Number</label>
+                    <input type="tel" name="phone" class="form-control" id="">
+
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
