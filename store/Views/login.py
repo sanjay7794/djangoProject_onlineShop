@@ -33,4 +33,5 @@ class Login(View):
         else:  
             error_msg="email or password invalid"    
         return render (request,'login.html',{'res':error_msg})
+        
     

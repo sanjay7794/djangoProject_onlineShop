@@ -33,10 +33,19 @@
                         <div class="row no-gutters">
 
 
-                            <input type="submit" value="-" class="col-2 btn btn-block btn-secondary">
-                            <div class="text-center col"> 2in cart </div>
-                            <input type="submit" value="+" class="col-2 btn btn-block btn-secondary">
+                            <form action="/" method="POST" class="col-2">
+                                {% csrf_token %}
+                                <input hidden type="text" name="product" value="{{i.id}}">
+                                <input hidden type="text" name="minus" value='True'>
+                                <input type="submit" value="-" class="btn btn-block btn-secondary">
+                            </form>
+                            <div class="text-center col"> {{ i|cart_quantity:request.session.cart }} in cart </div>
 
+                            <form action="/" method="POST" class="col-2">
+                                {% csrf_token %}
+                                <input hidden type="text" name="product" value="{{i.id}}">
+                                <input type="submit" value="+" class="btn btn-block btn-secondary">
+                            </form>
 
                         </div>
                         {% else %}

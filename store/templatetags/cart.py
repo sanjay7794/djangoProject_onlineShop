@@ -12,3 +12,6 @@ def is_in_cart(product,cart):
     return False
 
      
+@register.filter(name='cart_quantity')
+def cart_quantity(product, cart):
+        return cart[str(product.id)]
