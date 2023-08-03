@@ -15,9 +15,10 @@ class Index(View):
             quantity=cart.get(product)  
             if quantity: 
                 if minus=="True":
-                    cart[product]=quantity-1 
-                
-                        
+                    if quantity<=1:
+                        cart.pop(product)
+                    else:
+                        cart[product]=quantity-1       
                 else:
                     cart[product]=quantity+1     
             else:
@@ -35,6 +36,9 @@ class Index(View):
 
 
     def get(self, request):
+        # cart=request.session.get('cart')
+        # if not cart:
+        #     request.session['cart']={}
         prds = None
         categori_id =request.GET.get('category')
         if categori_id:

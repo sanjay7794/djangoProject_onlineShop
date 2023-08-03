@@ -20,7 +20,7 @@
             <div class="row mx-auto">
                 {% for i in products %}
 
-                <div class="card mx-auto mt-5" style="width: 18rem;">
+                <div class="card mx-auto mt-5" id={{i.id}} style="width: 18rem;">
                     <img src="{{i.image.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">{{i.name}}</h5>
@@ -33,7 +33,7 @@
                         <div class="row no-gutters">
 
 
-                            <form action="/" method="POST" class="col-2">
+                            <form action="/#{{i.id}}" method="POST" class="col-2">
                                 {% csrf_token %}
                                 <input hidden type="text" name="product" value="{{i.id}}">
                                 <input hidden type="text" name="minus" value='True'>
@@ -41,7 +41,7 @@
                             </form>
                             <div class="text-center col"> {{ i|cart_quantity:request.session.cart }} in cart </div>
 
-                            <form action="/" method="POST" class="col-2">
+                            <form action="/#{{i.id}}" method="POST" class="col-2">
                                 {% csrf_token %}
                                 <input hidden type="text" name="product" value="{{i.id}}">
                                 <input type="submit" value="+" class="btn btn-block btn-secondary">
@@ -49,7 +49,7 @@
 
                         </div>
                         {% else %}
-                        <form action="" method="POST" class="btn-block">
+                        <form action="/#{{i.id}}" method="POST" class="btn-block">
                             {% csrf_token %}
                             <input hidden type="text" name="product" value="{{i.id}}">
                             <input type="submit" class=" float-right form-control" value="add to cart">
