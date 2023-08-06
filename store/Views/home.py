@@ -27,7 +27,7 @@ class Index(View):
             cart={}
             cart[product]=1
         request.session['cart']=cart  
-        print('cart  :',request.session['cart'])     
+        #print('cart  :',request.session['cart'])     
         return redirect('homepage')
 
 
@@ -36,9 +36,9 @@ class Index(View):
 
 
     def get(self, request):
-        # cart=request.session.get('cart')
-        # if not cart:
-        #     request.session['cart']={}
+        cart=request.session.get('cart')
+        if not cart:
+            request.session['cart']={}
         prds = None
         categori_id =request.GET.get('category')
         if categori_id:

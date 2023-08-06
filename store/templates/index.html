@@ -1,4 +1,4 @@
-{% extends 'base.html'%} {% block content %} {% load cart %}
+{% extends 'base.html'%} {% block content %} {% load cart %} {% load currency_filter %}
 <div class="container-fluid">
     <div class="row">
 
@@ -23,8 +23,8 @@
                 <div class="card mx-auto mt-5" id={{i.id}} style="width: 18rem;">
                     <img src="{{i.image.url}}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{i.name}}</h5>
-                        <p class="card-text">{{i.price}}</p>
+                        <h6 class="card-title">{{i.name}}</h6>
+                       <b> <p class="card-text">{{i.price|currency}}</p></b>
 
 
                     </div>
