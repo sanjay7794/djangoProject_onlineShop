@@ -12,6 +12,12 @@ class Orders(models.Model):
     address=models.CharField(max_length=100,blank=True)
     phone=models.CharField(max_length=10,blank=True)
     date=models.DateField(default=datetime.datetime.today)
+    status=models.BooleanField(default=False)
 
-    def placeOrder(self):
+    def placeOrder(self): 
         self.save()
+
+
+    @staticmethod
+    def get_product_by_customer(customer_id):
+        return Orders.objects.filter(customer=customer_id).order_by('-date')
