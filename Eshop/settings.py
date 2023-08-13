@@ -49,8 +49,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'Eshop.store.middlewares.auth.auth_middleware',
 ]
-
+ 
 ROOT_URLCONF = 'Eshop.urls'
 
 TEMPLATES = [
