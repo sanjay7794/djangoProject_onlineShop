@@ -34,14 +34,26 @@
                 <th>{{products|cart_total:request.session.cart|currency}}</th>
             </tfoot>
         </table>
+        {% if request.session.customer %}
         <div class="m-3 p-3">
             <hr>
             <a href="#" data-toggle="modal" data-target="#exampleModal" class="btn btn-outline-info border rounded col-lg-3 float-right">
 
             check out
-        </a>
+            </a>
 
         </div>
+        {% else %}
+        <div class="m-3 p-3">
+            <hr>
+            <a href="/login" class="btn btn-outline-danger border rounded col-lg-3 float-right">
+
+            Log in to checkout
+            </a>
+
+        </div>
+        {% endif %}
+
     </div>
 </div>
 <!--Model-->
